@@ -21,7 +21,10 @@ class PlacesScreen extends ConsumerWidget {
               icon: const Icon(Icons.add)),
         ],
       ),
-      body: PlacesList(places: userPlaces),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 16.0),
+        child: PlacesList(places: userPlaces),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context)

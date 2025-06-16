@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ImageInput extends StatefulWidget {
-  const ImageInput({super.key});
-
+  const ImageInput({super.key, required this.onPickImage});
+  final void Function(File image) onPickImage;
   @override
   State<ImageInput> createState() {
     return _ImageInputState();
@@ -21,13 +21,14 @@ class _ImageInputState extends State<ImageInput> {
     setState(() {
       _selectedImage = File(pickedImage.path);
     });
+    widget.onPickImage(_selectedImage!);
   }
 
   @override
   Widget build(BuildContext context) {
     Widget content = TextButton.icon(
       onPressed: _takePicture,
-      label: Text("Add input"),
+      label: Text("Use Camera"),
       icon: Icon(Icons.camera),
     );
 
@@ -50,7 +51,7 @@ class _ImageInputState extends State<ImageInput> {
             child: IconButton(
               onPressed: _takePicture,
               icon: Icon(
-                Icons.refresh,
+                Icons.autorenew,
                 color: Theme.of(context).colorScheme.onSurface,
               ),
             ),
